@@ -2,46 +2,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CapitalizeFirstPipe } from './pipe/capitalize-first.pipe';
 import { AppComponent } from './app.component';
-import { PersonComponent } from './person/person.component';
-import { SearchPipe } from './pipe/search.pipe';
-import { personRouting } from './routes/person-routes.routes';
-import { Guard } from './routes/guard';
-import { DeactivateGuard } from './routes/deactivate-guard';
+import { commentRouting } from './routes/comment-routes.routes';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AddPersonComponent } from './add-person/add-person.component';
-import { PersonDropdownService } from './service/person-dropdown.service';
-import { PersonService } from './service/person.service';
-import { PersonDetailComponent } from './person-detail/person-detail.component';
-import { LoginComponent } from './login/login.component';
-import { ResolveGuard } from './routes/resolve-guard';
+import { CommentService } from './service/comment.service';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
-import { HttpErrorHandler } from './service/http-error-handler.service';
-import { MessageService } from './service/message.service';
-import { PostService } from "./service/post.service";
+// import { InMemoryDataService } from './in-memory-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddCommentComponent } from './add-comment/add-comment.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PersonComponent,
-    CapitalizeFirstPipe,
-    SearchPipe,
     PageNotFoundComponent,
-    AddPersonComponent,
-    PersonDetailComponent,
-    LoginComponent
+    AddCommentComponent,
+    CommentComponent,
+    CommentListComponent
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule, personRouting, HttpClientModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false, passThruUnknownUrl: true }),
+    BrowserModule, FormsModule, ReactiveFormsModule, commentRouting, HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [PersonService, PersonDropdownService, Guard, DeactivateGuard, ResolveGuard,
-    HttpErrorHandler, MessageService, PostService],
+  providers: [CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

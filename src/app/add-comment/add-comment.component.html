@@ -1,0 +1,19 @@
+<form #f="ngForm" id="commentForm" novalidate autocomplete="off" (ngSubmit)="addComment(f.value)">
+  <div class="form-group">
+    <table>
+      <tr>
+        <td>
+          <img src="./assets/user.jpeg">
+        </td>
+        <td style="text-align:left">
+          <span style="font-weight:bold">USER</span>
+          <textarea id="commentBox" name="commentBox" [(ngModel)]="commentModel.data" class="form-control" placeholder="Add a comment..."></textarea>
+          <input type="submit" id="btn-submit" class="btn btn-primary btn-block" value="Submit Comment">
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>
+<div *ngIf="commentList?.length>0">
+  <app-comment-list [comments]="commentList"></app-comment-list>
+</div>

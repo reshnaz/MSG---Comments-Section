@@ -1,0 +1,53 @@
+<!-- Displays main comments and their replies -->
+
+<div class="table-resposive float-right">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let comment of comments; let i = index">
+        <hr>
+        <div>
+          <td>
+            <img src="./assets/user.jpeg">
+          </td>
+          <td class="row">
+            <span style="font-weight:bold">USER</span>
+            <div>{{comment?.data}}</div>
+            <a (click)="incrementCommentLikes(comment.id)">Like</a>
+            <span *ngIf="comment?.likes>0">{{comment.likes}} Likes</span> |
+            <a (click)="comment.showReply=!comment?.showReply">Reply | </a>{{comment?.cDate | date: 'MMM d, y \'at\' h:mm a'}}
+            <div *ngIf="comment?.showReply">
+              <tr>
+                <textarea [(ngModel)]="rString" placeholder="Write a reply..." (keydown)="submitReply($event, comment?.id)"></textarea>
+              </tr>
+            </div>
+          </td>
+        </div>
+
+        <!-- Replies -->
+        <div class="group" style="float:right">
+          <table class="table" *ngIf="comment?.replies[0].rid != null">
+            <tr *ngFor="let reply of comment?.replies">
+              <td>
+                <img src="./assets/user.jpeg">
+              </td>
+              <td>
+                <span style="font-weight:bold">USER</span>
+                <div>{{reply.rdata}}</div>
+                <a (click)="incrementReplyLikes(comment.id, reply.rid)">Like</a>
+                <span *ngIf='reply?.likes>0'>
+                  {{reply.likes}} Likes
+                </span> |
+                <a (click)="reply.showReply=!reply?.showReply">Reply</a> | {{reply?.rdate | date: 'MMM d, y \'at\' h:mm a'}}
+                <div *ngIf="reply?.showReply">
+                  <tr>
+                    <textarea [(ngModel)]="rString" placeholder="Write a reply..." (keydown)="submitReply($event, comment?.id)"></textarea>
+                  </tr>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
